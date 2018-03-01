@@ -17,6 +17,7 @@ public class SecondActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_second);
 
+        //  Get the users' name and append it to the greeting
         Intent getUsersName = getIntent();
 
         String usersName = getUsersName.getExtras().getString("UsersName");
@@ -27,6 +28,7 @@ public class SecondActivity extends Activity {
 
     public void onStartThirdActivity(View view) {
 
+        //  Expect a result from activity 3
         Intent getThirdActivity = new Intent(this, ThirdActivity.class);
 
         final int result = 1;
@@ -38,6 +40,7 @@ public class SecondActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //  If everything went as expected, display the data received
         if (resultCode == RESULT_OK)
         {
             TextView messageFromA3 = (TextView) findViewById(R.id.A2T3);

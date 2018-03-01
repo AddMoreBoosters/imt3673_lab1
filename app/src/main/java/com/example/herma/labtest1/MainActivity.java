@@ -18,16 +18,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //  Populates the drop-down list
         Spinner spinner = (Spinner) findViewById(R.id.view1_List1);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.list1, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        //  Checks if a choice is stored in shared preferences
         int startSelection = -1;
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         startSelection = sharedPref.getInt(getString(R.string.keySpinner), startSelection);
 
+        //  If a choice was found, set that as the selected option
         if (startSelection != -1)
         {
             spinner.setSelection(startSelection);
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void onStartSecondActivity(View view) {
 
+        //  Send the user's name to the second activity
         Intent getSecondActivity = new Intent(this, SecondActivity.class);
 
         EditText ET_userName = (EditText) findViewById(R.id.view1_Text1);
@@ -52,16 +56,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        int selection = i;
-
+        //  Save the users' selection
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(getString(R.string.keySpinner), selection);
+        editor.putInt(getString(R.string.keySpinner), i);
         editor.apply();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        //  Do nothing
     }
 }

@@ -20,6 +20,7 @@ public class ThirdActivity extends Activity {
 
     public void onSendDataBack(View view) {
 
+        //  Send the whatever was typed back to activity 2
         EditText userDataET = (EditText) findViewById(R.id.A3T4);
 
         String userData = String.valueOf(userDataET.getText());
